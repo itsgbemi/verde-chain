@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VerdeChain | Invest in a Verified Green Future</title>
+<meta name="description" content="Blockchain-verified sustainability scores meet AI-powered impact investing">
+<style>
+/* RESET & BASE */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--verde-green:#00B894;
+--ai-teal:#00CEC9;
+--solar-orange:#FF9F43;
+--forest-charcoal:#2D3436;
+--arctic-white:#FFFFFF;
+--mist-gray:#F5F6FA;
+--gradient-primary:linear-gradient(90deg,var(--verde-green)0%,var(--ai-teal)100%);
+--font-primary:'Inter',sans-serif;
+--space-sm:1rem;--space-md:2rem;--space-lg:4rem;
+--radius-md:16px;--radius-full:9999px;
+--shadow-md:0 8px 24px rgba(0,0,0,0.12);
+}
+html{scroll-behavior:smooth;}
+body{
+font-family:var(--font-primary);
+color:var(--forest-charcoal);
+background:var(--arctic-white);
+line-height:1.6;
+}
+.container{
+max-width:1280px;
+margin:0 auto;
+padding:0 var(--space-md);
+}
+section{padding:var(--space-lg) 0;}
+
+/* TYPOGRAPHY */
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:600;line-height:1.2;}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:600;}
+.section-title{text-align:center;margin-bottom:var(--space-sm);}
+.section-subtitle{
+text-align:center;
+color:#666;
+max-width:600px;
+margin:0 auto var(--space-lg);
+font-size:1.25rem;
+}
+.gradient-text{
+background:var(--gradient-primary);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+
+/* BUTTONS */
+.btn{
+display:inline-flex;
+align-items:center;
+gap:0.5rem;
+padding:0.875rem 1.75rem;
+border-radius:var(--radius-full);
+font-weight:500;
+text-decoration:none;
+border:2px solid transparent;
+cursor:pointer;
+transition:all 300ms ease;
+}
+.btn-primary{
+background:var(--gradient-primary);
+color:var(--arctic-white);
+}
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:var(--shadow-md);
+}
+.btn-secondary{
+background:transparent;
+border-color:var(--verde-green);
+color:var(--verde-green);
+}
+.btn-secondary:hover{
+background:var(--verde-green);
+color:var(--arctic-white);
+transform:translateY(-2px);
+}
+.btn-lg{padding:1rem 2rem;font-size:1.125rem;}
+
+/* NAVIGATION */
+.navbar{
+position:fixed;
+top:0;
+left:0;
+right:0;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(10px);
+z-index:1000;
+padding:1rem 0;
+border-bottom:1px solid rgba(0,0,0,0.1);
+}
+.navbar .container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.logo{
+display:flex;
+align-items:center;
+gap:0.5rem;
+text-decoration:none;
+font-weight:700;
+font-size:1.25rem;
+color:var(--forest-charcoal);
+}
+.nav-links{
+display:flex;
+align-items:center;
+gap:var(--space-md);
+}
+.nav-links a{
+text-decoration:none;
+color:var(--forest-charcoal);
+font-weight:500;
+transition:color 150ms ease;
+}
+.nav-links a:hover{color:var(--verde-green);}
+.menu-toggle{display:none;}
+
+/* HERO SECTION */
+.hero{
+padding-top:calc(var(--space-lg) + 4rem);
+position:relative;
+overflow:hidden;
+}
+.hero .container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:var(--space-lg);
+align-items:center;
+}
+.hero-subtitle{
+font-size:1.25rem;
+margin:var(--space-md) 0 var(--space-lg);
+color:#555;
+}
+.hero-cta{
+display:flex;
+gap:var(--space-md);
+margin-bottom:var(--space-lg);
+}
+.impact-counter{
+display:flex;
+gap:var(--space-lg);
+margin-top:var(--space-md);
+}
+.counter-item{display:flex;flex-direction:column;}
+.counter{
+font-size:2.5rem;
+font-weight:700;
+background:var(--gradient-primary);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.counter-label{
+font-size:0.875rem;
+color:#666;
+text-transform:uppercase;
+letter-spacing:0.5px;
+}
+
+/* DASHBOARD PREVIEW */
+.dashboard-preview{
+position:relative;
+background:var(--forest-charcoal);
+border-radius:var(--radius-md);
+padding:var(--space-md);
+transform:perspective(1000px) rotateY(-10deg);
+box-shadow:var(--shadow-md);
+}
+.dashboard-card{
+background:var(--arctic-white);
+border-radius:var(--radius-md);
+padding:var(--space-md);
+}
+.card-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:var(--space-md);
+}
+.ecoscore-badge{
+background:var(--gradient-primary);
+color:white;
+padding:0.25rem 0.75rem;
+border-radius:var(--radius-full);
+font-size:0.875rem;
+}
+.verified-badge{
+background:#00CEC9;
+color:white;
+padding:0.25rem 0.75rem;
+border-radius:var(--radius-full);
+font-size:0.875rem;
+}
+.card-body{display:flex;flex-direction:column;gap:1rem;}
+.metric{
+display:flex;
+justify-content:space-between;
+padding:0.5rem 0;
+border-bottom:1px solid #eee;
+}
+.metric-value{font-weight:600;}
+.highlight{color:var(--verde-green);}
+.floating-element{
+position:absolute;
+font-size:1.5rem;
+animation:float 6s ease-in-out infinite;
+}
+.floating-element.coin{
+top:20%;
+left:10%;
+color:#FF9F43;
+animation-delay:0s;
+}
+.floating-element.leaf{
+top:60%;
+right:15%;
+color:#00B894;
+animation-delay:2s;
+}
+.floating-element.tree{
+bottom:20%;
+left:20%;
+color:#00CEC9;
+animation-delay:4s;
+}
+@keyframes float{
+0%,100%{transform:translateY(0px);}
+50%{transform:translateY(-20px);}
+}
+
+/* SOCIAL PROOF */
+.social-proof{padding:var(--space-md) 0;}
+.section-label{
+text-align:center;
+color:#666;
+margin-bottom:var(--space-md);
+font-size:0.875rem;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+.logo-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:var(--space-md);
+align-items:center;
+}
+.logo-item{
+display:flex;
+justify-content:center;
+align-items:center;
+height:60px;
+filter:grayscale(100%);
+opacity:0.6;
+transition:all 300ms ease;
+}
+.logo-item:hover{filter:grayscale(0);opacity:1;}
+
+/* FEATURES GRID */
+.features-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:var(--space-md);
+margin-top:var(--space-lg);
+}
+.feature-card{
+background:var(--mist-gray);
+border-radius:var(--radius-md);
+padding:var(--space-md);
+transition:transform 300ms ease;
+}
+.feature-card:hover{
+transform:translateY(-8px);
+box-shadow:var(--shadow-md);
+}
+.feature-icon{
+width:64px;
+height:64px;
+margin-bottom:var(--space-md);
+}
+.feature-card h3{
+font-size:1.5rem;
+margin-bottom:0.75rem;
+color:var(--forest-charcoal);
+}
+
+/* TIMELINE */
+.timeline{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:var(--space-md);
+margin-top:var(--space-lg);
+position:relative;
+}
+.timeline::before{
+content:'';
+position:absolute;
+top:32px;
+left:0;
+right:0;
+height:2px;
+background:var(--gradient-primary);
+z-index:1;
+}
+.timeline-step{
+position:relative;
+z-index:2;
+text-align:center;
+}
+.step-icon{
+width:64px;
+height:64px;
+background:var(--arctic-white);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto var(--space-sm);
+border:2px solid var(--verde-green);
+font-size:1.5rem;
+color:var(--verde-green);
+}
+.timeline-step h3{
+font-size:1.125rem;
+margin-bottom:0.5rem;
+}
+.timeline-step p{
+font-size:0.875rem;
+color:#666;
+}
+
+/* COMPANIES SECTION */
+.companies-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:var(--space-lg);
+align-items:center;
+}
+.benefits-list{
+margin:var(--space-md) 0;
+list-style:none;
+}
+.benefits-list li{
+display:flex;
+align-items:center;
+gap:0.75rem;
+margin-bottom:0.75rem;
+}
+.benefits-list i{color:var(--verde-green);}
+.certificate-card{
+background:var(--arctic-white);
+border-radius:var(--radius-md);
+padding:var(--space-md);
+border:2px solid var(--verde-green);
+box-shadow:var(--shadow-md);
+}
+.certificate-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:var(--space-md);
+}
+.certificate-badge{
+background:var(--gradient-primary);
+color:white;
+padding:0.5rem 1rem;
+border-radius:var(--radius-full);
+font-weight:600;
+}
+.certificate-level{
+color:var(--verde-green);
+font-weight:600;
+}
+.company-info{margin-bottom:var(--space-md);}
+.metrics-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:var(--space-md);
+margin:var(--space-md) 0;
+}
+.metric{
+text-align:center;
+}
+.metric-value{
+display:block;
+font-size:1.5rem;
+font-weight:700;
+color:var(--forest-charcoal);
+}
+.metric-label{
+font-size:0.875rem;
+color:#666;
+}
+.verification-info{
+display:flex;
+justify-content:space-between;
+margin-top:var(--space-md);
+padding-top:var(--space-md);
+border-top:1px solid #eee;
+font-size:0.75rem;
+color:#666;
+}
+
+/* WAITLIST */
+.waitlist-card{
+background:var(--gradient-primary);
+border-radius:var(--radius-md);
+padding:var(--space-lg);
+color:var(--arctic-white);
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:var(--space-lg);
+}
+.waitlist-content h2{
+font-size:2rem;
+margin-bottom:var(--space-sm);
+}
+.waitlist-form{margin:var(--space-md) 0;}
+.form-group{
+display:flex;
+gap:0.5rem;
+margin-bottom:var(--space-md);
+}
+.form-group input{
+flex:1;
+padding:1rem;
+border-radius:var(--radius-full);
+border:none;
+font-size:1rem;
+}
+.form-options{
+display:flex;
+gap:var(--space-md);
+}
+.checkbox{
+display:flex;
+align-items:center;
+gap:0.5rem;
+font-size:0.875rem;
+}
+.form-note{
+font-size:0.875rem;
+opacity:0.8;
+margin-top:var(--space-md);
+}
+.form-note a{color:white;text-decoration:underline;}
+.waitlist-rewards h3{margin-bottom:var(--space-md);}
+.waitlist-rewards ul{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:0.75rem;
+}
+.waitlist-rewards li{
+display:flex;
+align-items:center;
+gap:0.75rem;
+}
+
+/* FOOTER */
+.footer{
+background:var(--forest-charcoal);
+color:var(--arctic-white);
+padding:var(--space-lg) 0;
+}
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:var(--space-lg);
+margin-bottom:var(--space-lg);
+}
+.footer-col h4{
+margin-bottom:var(--space-md);
+font-size:1rem;
+}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:0.5rem;}
+.footer-col a{
+color:#ccc;
+text-decoration:none;
+font-size:0.875rem;
+}
+.footer-col a:hover{color:var(--verde-green);}
+.social-links{
+display:flex;
+gap:1rem;
+margin-top:var(--space-md);
+}
+.social-links a{
+color:var(--arctic-white);
+font-size:1.25rem;
+}
+.footer-bottom{
+border-top:1px solid rgba(255,255,255,0.1);
+padding-top:var(--space-md);
+text-align:center;
+}
+.disclaimer{
+font-size:0.75rem;
+color:#999;
+margin-top:0.5rem;
+max-width:800px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+.features-grid{grid-template-columns:repeat(2,1fr);}
+.timeline{grid-template-columns:repeat(3,1fr);}
+.footer-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:768px){
+.hero .container{grid-template-columns:1fr;}
+.nav-links{display:none;}
+.menu-toggle{display:block;}
+.logo-grid{grid-template-columns:repeat(3,1fr);}
+.features-grid{grid-template-columns:1fr;}
+.timeline{grid-template-columns:1fr;gap:var(--space-lg);}
+.timeline::before{display:none;}
+.companies-grid{grid-template-columns:1fr;}
+.waitlist-card{grid-template-columns:1fr;}
+.footer-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+.hero-cta{flex-direction:column;}
+.logo-grid{grid-template-columns:repeat(2,1fr);}
+.footer-grid{grid-template-columns:1fr;}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/phosphor-icons"></script>
+</head>
+<body>
+<nav class="navbar">
+<div class="container">
+<a href="/" class="logo">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+<path d="M16 2L4 10V22L16 30L28 22V10L16 2Z" fill="#00B894"/>
+<circle cx="16" cy="16" r="4" fill="#FFFFFF"/>
+</svg>
+<span>VerdeChain</span>
+</a>
+<div class="nav-links">
+<a href="#how-it-works">How It Works</a>
+<a href="#features">Features</a>
+<a href="#for-companies">For Companies</a>
+<a href="#waitlist" class="btn btn-outline">Early Access</a>
+</div>
+<button class="menu-toggle" aria-label="Toggle menu">
+<i class="ph ph-list"></i>
+</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<h1>Invest in a <span class="gradient-text">Verified Green Future</span></h1>
+<p class="hero-subtitle">Blockchain-verified sustainability scores meet AI-powered impact investing. Earn rewards for backing real change.</p>
+<div class="hero-cta">
+<a href="#waitlist" class="btn btn-primary btn-lg">
+<i class="ph ph-rocket-launch"></i>
+Join Early Access
+</a>
+<a href="#how-it-works" class="btn btn-secondary btn-lg">
+<i class="ph ph-play-circle"></i>
+See How It Works
+</a>
+</div>
+<div class="impact-counter">
+<div class="counter-item">
+<span class="counter" data-target="24791">0</span>
+<span class="counter-label">tons of CO₂ verified</span>
+</div>
+<div class="counter-item">
+<span class="counter" data-target="342">0</span>
+<span class="counter-label">projects funded</span>
+</div>
+<div class="counter-item">
+<span class="counter" data-target="18.4">0</span>
+<span class="counter-label">M$ deployed</span>
+</div>
+</div>
+</div>
+<div class="hero-visual">
+<div class="dashboard-preview">
+<div class="dashboard-card">
+<div class="card-header">
+<span class="ecoscore-badge">EcoScore: 87</span>
+<span class="verified-badge">✓ AI Verified</span>
+</div>
+<div class="card-body">
+<div class="metric">
+<span class="metric-label">Carbon Offset</span>
+<span class="metric-value">12.4 tons</span>
+</div>
+<div class="metric">
+<span class="metric-label">Trees Equivalent</span>
+<span class="metric-value">83</span>
+</div>
+<div class="metric">
+<span class="metric-label">Vibe Coins Earned</span>
+<span class="metric-value highlight">+342</span>
+</div>
+</div>
+</div>
+<div class="floating-element coin"><i class="ph ph-coin"></i></div>
+<div class="floating-element leaf"><i class="ph ph-leaf"></i></div>
+<div class="floating-element tree"><i class="ph ph-tree"></i></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="social-proof">
+<div class="container">
+<p class="section-label">Trusted by leading organizations</p>
+<div class="logo-grid">
+<div class="logo-item">WWF</div>
+<div class="logo-item">United Nations</div>
+<div class="logo-item">Stanford</div>
+<div class="logo-item">TechCrunch</div>
+<div class="logo-item">CoinDesk</div>
+</div>
+</div>
+</section>
+
+<section class="value-prop" id="features">
+<div class="container">
+<h2 class="section-title">The Future of Impact Investing</h2>
+<p class="section-subtitle">Transparency meets technology to fight greenwashing</p>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">
+<svg width="48" height="48" viewBox="0 0 48 48">
+<circle cx="24" cy="24" r="20" fill="#00B894" fill-opacity="0.1"/>
+<path d="M32 18L22 28L18 24" stroke="#00B894" stroke-width="3"/>
+<circle cx="24" cy="24" r="8" fill="#00B894"/>
+</svg>
+</div>
+<h3>AI-Powered Verification</h3>
+<p>GreenGuardian AI analyzes satellite data, supply chains, and emissions reports to calculate immutable EcoScores.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">
+<svg width="48" height="48" viewBox="0 0 48 48">
+<rect x="8" y="8" width="32" height="32" rx="8" fill="#00B894" fill-opacity="0.1"/>
+<path d="M18 24L22 28L30 20" stroke="#00B894" stroke-width="3"/>
+</svg>
+</div>
+<h3>Tokenized Green Projects</h3>
+<p>Invest directly in vetted solar farms, reforestation, and clean tech. Your stake is an NFT with real-world impact.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">
+<svg width="48" height="48" viewBox="0 0 48 48">
+<circle cx="24" cy="24" r="20" fill="#00B894" fill-opacity="0.1"/>
+<circle cx="24" cy="24" r="12" fill="#FF9F43"/>
+<path d="M24 20V28M20 24H28" stroke="white" stroke-width="2"/>
+</svg>
+</div>
+<h3>Impact Rewards</h3>
+<p>Earn Vibe Coins for every investment. Use them to boost projects, unlock premium data, or govern the platform.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="how-it-works" id="how-it-works">
+<div class="container">
+<h2 class="section-title">How VerdeChain Works</h2>
+<p class="section-subtitle">From verification to investment in 6 simple steps</p>
+<div class="timeline">
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-database"></i></div>
+<h3>Data Collection</h3>
+<p>IoT sensors, audit reports, and satellite feeds</p>
+</div>
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-brain"></i></div>
+<h3>AI Analysis</h3>
+<p>GreenGuardian AI processes and verifies data</p>
+</div>
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-seal-check"></i></div>
+<h3>On-Chain Verification</h3>
+<p>Scores minted as immutable blockchain records</p>
+</div>
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-storefront"></i></div>
+<h3>Marketplace Listing</h3>
+<p>Projects listed with transparent impact metrics</p>
+</div>
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-chart-line-up"></i></div>
+<h3>Impact Tracking</h3>
+<p>Real-time dashboards show financial & environmental returns</p>
+</div>
+<div class="timeline-step">
+<div class="step-icon"><i class="ph ph-coin"></i></div>
+<h3>Reward Distribution</h3>
+<p>Earn Vibe Coins based on verified impact</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="for-companies" id="for-companies">
+<div class="container">
+<div class="companies-grid">
+<div class="companies-content">
+<h2 class="section-title">Get Verified.<br>Get Funded.</h2>
+<p class="section-subtitle">Join the new standard for corporate sustainability</p>
+<ul class="benefits-list">
+<li><i class="ph ph-check-circle"></i> Increase investor trust with tamper-proof badges</li>
+<li><i class="ph ph-check-circle"></i> Access 50,000+ impact-first investors</li>
+<li><i class="ph ph-check-circle"></i> Reduce verification costs by 70% with AI audits</li>
+</ul>
+<a href="#waitlist" class="btn btn-primary"><i class="ph ph-buildings"></i> Request Enterprise Demo</a>
+</div>
+<div class="companies-visual">
+<div class="certificate-card">
+<div class="certificate-header">
+<span class="certificate-badge">Proof-of-Green™</span>
+<span class="certificate-level">Level 4 Verified</span>
+</div>
+<div class="company-info">
+<h4>SolarFlare Energy</h4>
+<p>Renewable Energy Provider</p>
+</div>
+<div class="metrics-grid">
+<div class="metric">
+<span class="metric-value">94</span>
+<span class="metric-label">EcoScore</span>
+</div>
+<div class="metric">
+<span class="metric-value">12.4K</span>
+<span class="metric-label">tons CO₂</span>
+</div>
+<div class="metric">
+<span class="metric-value">$2.1M</span>
+<span class="metric-label">funded</span>
+</div>
+</div>
+<div class="verification-info">
+<span class="verified-date">Verified: 15 Nov 2024</span>
+<span class="blockchain-id">On-chain: 0x8a3f...c4d2</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="waitlist" id="waitlist">
+<div class="container">
+<div class="waitlist-card">
+<div class="waitlist-content">
+<h2>Join the Green Investment Revolution</h2>
+<p>Be among the first to access VerdeChain. Get early adopter rewards and help shape the future.</p>
+<form id="waitlist-form" class="waitlist-form">
+<div class="form-group">
+<input type="email" id="email" name="email" placeholder="Enter your email" required>
+<button type="submit" class="btn btn-primary">
+<i class="ph ph-paper-plane-tilt"></i>
+Join Waitlist
+</button>
+</div>
+<div class="form-options">
+<label class="checkbox">
+<input type="checkbox" name="investor">
+<span>I'm an impact investor</span>
+</label>
+<label class="checkbox">
+<input type="checkbox" name="company">
+<span>I represent a company</span>
+</label>
+</div>
+</form>
+<p class="form-note">By joining, you agree to our Privacy Policy. No spam, ever.</p>
+</div>
+<div class="waitlist-rewards">
+<h3>Early Adopter Rewards</h3>
+<ul>
+<li><i class="ph ph-crown"></i><span>1,000 bonus Vibe Coins</span></li>
+<li><i class="ph ph-star"></i><span>Exclusive project access</span></li>
+<li><i class="ph ph-users"></i><span>Governance voting rights</span></li>
+<li><i class="ph ph-chart-line"></i><span>Zero fees for 6 months</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<a href="/" class="logo">
+<svg width="24" height="24" viewBox="0 0 32 32">
+<path d="M16 2L4 10V22L16 30L28 22V10L16 2Z" fill="#00B894"/>
+<circle cx="16" cy="16" r="4" fill="#FFFFFF"/>
+</svg>
+<span>VerdeChain</span>
+</a>
+<p style="margin:0.5rem 0 1rem;font-size:0.875rem;opacity:0.8;">Transparent sustainability. Verified impact.</p>
+<div class="social-links">
+<a href="#" aria-label="Twitter"><i class="ph ph-twitter-logo"></i></a>
+<a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+<a href="#" aria-label="Discord"><i class="ph ph-discord-logo"></i></a>
+<a href="#" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Product</h4>
+<ul>
+<li><a href="#how-it-works">How It Works</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#for-companies">For Companies</a></li>
+<li><a href="#">Pricing</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Resources</h4>
+<ul>
+<li><a href="#">Whitepaper</a></li>
+<li><a href="#">API Docs</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Research</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Careers</a></li>
+<li><a href="#">Press</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Legal</h4>
+<ul>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms of Service</a></li>
+<li><a href="#">Cookie Policy</a></li>
+<li><a href="#">Disclaimer</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 VerdeChain. All rights reserved.</p>
+<p class="disclaimer">VerdeChain is a technology platform. Investments involve risk. This is not financial advice.</p>
+</div>
+</div>
+</footer>
+
+<script>
+// Animated Counters
+document.addEventListener('DOMContentLoaded', function() {
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+
+counters.forEach(counter => {
+const target = +counter.getAttribute('data-target');
+const increment = target / speed;
+
+const updateCounter = () => {
+const current = +counter.innerText;
+if(current < target) {
+counter.innerText = Math.ceil(current + increment);
+setTimeout(updateCounter, 10);
+} else {
+counter.innerText = target.toLocaleString();
+}
+};
+updateCounter();
+});
+
+// Form Submission
+const form = document.getElementById('waitlist-form');
+if(form) {
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const email = document.getElementById('email').value;
+const investor = document.getElementById('investor').checked;
+const company = document.getElementById('company').checked;
+// Here you would typically send to a backend
+alert(`Thank you! You've joined the waitlist with email: ${email}`);
+form.reset();
+});
+}
+
+// Mobile Menu Toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+if(menuToggle && navLinks) {
+menuToggle.addEventListener('click', () => {
+navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+});
+}
+
+// Scroll Animations
+const observerOptions = {
+root: null,
+rootMargin: '0px',
+threshold: 0.1
+};
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if(entry.isIntersecting) {
+entry.target.style.opacity = '1';
+entry.target.style.transform = 'translateY(0)';
+}
+});
+}, observerOptions);
+// Add 'fade-in' class to elements you want to animate
+document.querySelectorAll('.feature-card, .timeline-step').forEach(el => {
+el.style.opacity = '0';
+el.style.transform = 'translateY(20px)';
+el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+observer.observe(el);
+});
+});
+</script>
+</body>
+</html>
